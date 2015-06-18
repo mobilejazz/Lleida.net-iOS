@@ -87,7 +87,7 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
     else
     {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [_client sendSMS:message phones:@[phone] completionBlock:^(MJLleidaNetResult *result, NSError *error) {
+        [_client api_sendSMS:message phones:@[phone] completionBlock:^(MJLleidaNetResult *result, NSError *error) {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
             if (error)
@@ -165,7 +165,7 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
             if (row == ActionRowUserDetails)
             {
                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                [_client userDetailsWithCompletionBlock:^(MJLleidaNetResult *result, NSError *error) {
+                [_client api_userDetailsWithCompletionBlock:^(MJLleidaNetResult *result, NSError *error) {
                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                     
                     if (error)

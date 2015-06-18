@@ -53,35 +53,6 @@
     [self mjz_performRequest:request completionBlock:completionBlock];
 }
 
-- (void)userDetailsWithCompletionBlock:(MJLleidaNetResultBlock)completionBlock
-{
-    MJLleidaNetUserDetailsRequest *request = [MJLleidaNetUserDetailsRequest new];
-    [self mjz_performRequest:request completionBlock:completionBlock];
-}
-
-- (void)sendSMS:(NSString*)message phones:(NSArray*)phones completionBlock:(MJLleidaNetResultBlock)completionBlock
-{
-    MJLleidaNetSMSRequest *request = [MJLleidaNetSMSRequest new];
-    request.text = message;
-    request.recipients = phones;
-    
-    [self mjz_performRequest:request completionBlock:completionBlock];
-}
-
-- (void)stateOfMessageWithIdentifier:(NSString*)identifier completionBlock:(MJLleidaNetResultBlock)completionBlock
-{
-    MJLleidaNetMessageStatusRequest *request = [MJLleidaNetMessageStatusRequest new];
-    request.identifier = identifier;
-    
-    [self mjz_performRequest:request completionBlock:completionBlock];
-}
-
-- (void)incomingMessagesWithCompletionBlock:(MJLleidaNetResultBlock)completionBlock
-{
-    MJLleidaNetIncomingMessagesRequest*request = [MJLleidaNetIncomingMessagesRequest new];
-    [self mjz_performRequest:request completionBlock:completionBlock];
-}
-
 #pragma mark Private Methods
 
 - (void)mjz_performRequest:(MJLleidaNetRequest*)request completionBlock:(MJLleidaNetResultBlock)completionBlock
@@ -111,6 +82,39 @@
         if (completionBlock)
             completionBlock(nil, error);
     }];
+}
+
+@end
+
+@implementation MJLleidaNetClient (API)
+
+- (void)api_userDetailsWithCompletionBlock:(MJLleidaNetResultBlock)completionBlock
+{
+    MJLleidaNetUserDetailsRequest *request = [MJLleidaNetUserDetailsRequest new];
+    [self performRequest:request completionBlock:completionBlock];
+}
+
+- (void)api_sendSMS:(NSString*)message phones:(NSArray*)phones completionBlock:(MJLleidaNetResultBlock)completionBlock
+{
+    MJLleidaNetSMSRequest *request = [MJLleidaNetSMSRequest new];
+    request.text = message;
+    request.recipients = phones;
+    
+    [self performRequest:request completionBlock:completionBlock];
+}
+
+- (void)api_stateOfMessageWithIdentifier:(NSString*)identifier completionBlock:(MJLleidaNetResultBlock)completionBlock
+{
+    MJLleidaNetMessageStatusRequest *request = [MJLleidaNetMessageStatusRequest new];
+    request.identifier = identifier;
+    
+    [self performRequest:request completionBlock:completionBlock];
+}
+
+- (void)api_incomingMessagesWithCompletionBlock:(MJLleidaNetResultBlock)completionBlock
+{
+    MJLleidaNetIncomingMessagesRequest*request = [MJLleidaNetIncomingMessagesRequest new];
+    [self performRequest:request completionBlock:completionBlock];
 }
 
 @end

@@ -15,6 +15,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #import "MJLleidaNetResult.h"
 
@@ -23,6 +24,14 @@
 #import "MJLleidaNetWAPRequest.h"
 #import "MJLleidaNetMessageStatusRequest.h"
 #import "MJLleidaNetIncomingMessagesRequest.h"
+
+/**
+ * Returns the concatenated string including the identifier and phone to use as message identifier.
+ **/
+inline NSString* MJLleidaNetMsgIdentifier(NSString *identifier, NSString *phone)
+{
+    return [NSString stringWithFormat:@"%@:%@", identifier, phone];
+}
 
 typedef void (^MJLleidaNetResultBlock)(MJLleidaNetResult *result, NSError *error);
 
@@ -71,6 +80,10 @@ typedef void (^MJLleidaNetResultBlock)(MJLleidaNetResult *result, NSError *error
  **/
 - (void)performRequest:(MJLleidaNetRequest*)request completionBlock:(MJLleidaNetResultBlock)completionBlock;
 
+@end
+
+@interface MJLleidaNetClient (API)
+
 /** ************************************************************ **
  * @name Specific API methods
  ** ************************************************************ **/
@@ -80,7 +93,7 @@ typedef void (^MJLleidaNetResultBlock)(MJLleidaNetResult *result, NSError *error
  * @param completionBlock A completion block.
  * @discussion If success, the user details will be located in the `userInfo` property of the result.
  **/
-- (void)userDetailsWithCompletionBlock:(MJLleidaNetResultBlock)completionBlock;
+- (void)api_userDetailsWithCompletionBlock:(MJLleidaNetResultBlock)completionBlock;
 
 /**
  * Send a SMS message to multiple phones.
@@ -88,19 +101,19 @@ typedef void (^MJLleidaNetResultBlock)(MJLleidaNetResult *result, NSError *error
  * @param phones An array of strings of phone numbers.
  * @param completionBlock A completion block.
  **/
-- (void)sendSMS:(NSString*)message phones:(NSArray*)phones completionBlock:(MJLleidaNetResultBlock)completionBlock;
+- (void)api_sendSMS:(NSString*)message phones:(NSArray*)phones completionBlock:(MJLleidaNetResultBlock)completionBlock;
 
 /**
  * Requests the state of a sent message.
  * @param identifier The identifier of the sent message.
  * @param completionBlock A completion block.
  **/
-- (void)stateOfMessageWithIdentifier:(NSString*)identifier completionBlock:(MJLleidaNetResultBlock)completionBlock;
+- (void)api_stateOfMessageWithIdentifier:(NSString*)identifier completionBlock:(MJLleidaNetResultBlock)completionBlock;
 
 /**
  * Fetches the incoming messages since last fetch.
  * @param completionBlock A completion block.
  **/
-- (void)incomingMessagesWithCompletionBlock:(MJLleidaNetResultBlock)completionBlock;
+- (void)api_incomingMessagesWithCompletionBlock:(MJLleidaNetResultBlock)completionBlock;
 
 @end
