@@ -16,7 +16,6 @@ typedef NS_ENUM(NSUInteger, Section)
     SectionActions,
 };
 
-
 typedef NS_ENUM(NSUInteger, ActionRow)
 {
     ActionRowUserDetails,
@@ -31,6 +30,9 @@ typedef NS_ENUM(NSUInteger, TextFieldType)
     TextFieldTypeNumber,
     TextFieldTypeSMS,
 };
+
+static NSString * const kUsernameKey = @"com.mobilejazz.Lleida-net.username";
+static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
 
 @interface ViewController () <UITextFieldDelegate>
 
@@ -54,6 +56,14 @@ typedef NS_ENUM(NSUInteger, TextFieldType)
     
     _usernameField.tag = TextFieldTypeUsername;
     _passwordField.tag = TextFieldTypePassword;
+    
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:kUsernameKey];
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:kPasswordKey];
+    _usernameField.text = username;
+    _passwordField.text = password;
+    
+    if (username && password)
+        _client = [[MJLleidaNetClient alloc] initWithUsername:username password:password];
 }
 
 #pragma mark Private Methods
@@ -98,7 +108,13 @@ typedef NS_ENUM(NSUInteger, TextFieldType)
         if (_usernameField.text.length == 0)
             [self mjz_showAlertWithTitle:@"Invalid Username" message:@"Please, enter a valid username."];
         else
+        {
+            NSString *username = _usernameField.text;
+            [[NSUserDefaults standardUserDefaults] setObject:username forKey:kUsernameKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
             [_passwordField becomeFirstResponder];
+        }
     }
     else if (textField == _passwordField)
     {
@@ -106,6 +122,10 @@ typedef NS_ENUM(NSUInteger, TextFieldType)
             [self mjz_showAlertWithTitle:@"Invalid Password" message:@"Please, enter a valid password."];
         else
         {
+            NSString *password = _passwordField.text;
+            [[NSUserDefaults standardUserDefaults] setObject:password forKey:kPasswordKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
             _client = [[MJLleidaNetClient alloc] initWithUsername:_usernameField.text password:_passwordField.text];
             [_passwordField resignFirstResponder];
         }
@@ -161,7 +181,7 @@ typedef NS_ENUM(NSUInteger, TextFieldType)
                 [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
                     _numberField = textField;
                     textField.placeholder = @"Phone number";
-                    textField.keyboardType = UIKeyboardTypeNumberPad;
+                    textField.keyboardType = UIKeyboardTypePhonePad;
                     textField.delegate = self;
                     textField.tag = TextFieldTypeNumber;
                 }];

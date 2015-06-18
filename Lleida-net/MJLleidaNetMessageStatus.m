@@ -14,14 +14,11 @@
 // limitations under the License.
 //
 
-#import "MJLleidaNetResult.h"
+#import "MJLleidaNetMessageStatus.h"
 
-#import "MJLleidaNetXML.h"
-
-@implementation MJLleidaNetResult
+@implementation MJLleidaNetMessageStatus
 {
     NSMutableString *_mutableString;
-    NSMutableArray *_array;
 }
 
 #pragma mark - Protocols
@@ -29,30 +26,7 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
-    if ([elementName isEqualToString:kUserInfoKey])
-    {
-        _userInfo = [[MJLleidaNetUserInfo alloc] initWithParent:self xmlKey:kUserInfoKey];
-        parser.delegate = _userInfo;
-    }
-    else if ([elementName isEqualToString:@"mt_status"])
-    {
-        _messageStatus = [[MJLleidaNetMessageStatus alloc] initWithParent:self xmlKey:@"mt_status"];
-        parser.delegate = _messageStatus;
-    }
-    else if ([elementName isEqualToString:@"mo_list"])
-    {
-        _array = [NSMutableArray array];
-    }
-    else if ([elementName isEqualToString:@"mo"])
-    {
-        MJLleidaNetIncomingMessage *incomingMessage = [[MJLleidaNetIncomingMessage alloc] initWithParent:self xmlKey:@"mo"];
-        parser.delegate = incomingMessage;
-        [_array addObject:incomingMessage];
-    }
-    else
-    {
-        _mutableString = [NSMutableString string];
-    }
+    _mutableString = [NSMutableString string];
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
@@ -62,23 +36,29 @@
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {
-    // If finishing result, return to the previous delegate
-    
-    if ([elementName isEqualToString:kActionKey])
+    if ([elementName isEqualToString:@"mt_id"])
     {
-        _action = [_mutableString copy];
+        _identifier = [_mutableString copy];
     }
-    else if ([elementName isEqualToString:kStatusKey])
+    else if ([elementName isEqualToString:@"status_code"])
     {
         _status = [[_mutableString copy] integerValue];
     }
-    else if ([elementName isEqualToString:kMsgKey])
+    else if ([elementName isEqualToString:@"status_desc"])
     {
-        _message = [_mutableString copy];
+        _statusDescription = [_mutableString copy];
     }
-    else if ([elementName isEqualToString:@"mo_list"])
+    else if ([elementName isEqualToString:@"tm_last_update"])
     {
-        _incomingMessages = [_array copy];
+        _lastUpdate = [NSDate dateWithTimeIntervalSince1970:[[_mutableString copy] doubleValue]];
+    }
+    else if ([elementName isEqualToString:@"credits"])
+    {
+        _credits = [[_mutableString copy] doubleValue];
+    }
+    else if ([elementName isEqualToString:@"num_parts"])
+    {
+        _parts = [[_mutableString copy] integerValue];
     }
     
     _mutableString = nil;
@@ -89,10 +69,12 @@
 - (NSString*)description
 {
     #define key(key) NSStringFromSelector(@selector(key))
-    NSDictionary *dictionary = [self dictionaryWithValuesForKeys:@[key(action),
+    NSDictionary *dictionary = [self dictionaryWithValuesForKeys:@[key(identifier),
                                                                    key(status),
-                                                                   key(message),
-                                                                   key(userInfo),
+                                                                   key(statusDescription),
+                                                                   key(lastUpdate),
+                                                                   key(credits),
+                                                                   key(parts),
                                                                    ]];
     
     return [NSString stringWithFormat:@"%@", [dictionary description]];

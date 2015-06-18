@@ -18,6 +18,12 @@
 
 #import "MJLleidaNetResult.h"
 
+#import "MJLleidaNetUserDetailsRequest.h"
+#import "MJLleidaNetSMSRequest.h"
+#import "MJLleidaNetWAPRequest.h"
+#import "MJLleidaNetMessageStatusRequest.h"
+#import "MJLleidaNetIncomingMessagesRequest.h"
+
 typedef void (^MJLleidaNetResultBlock)(MJLleidaNetResult *result, NSError *error);
 
 /**
@@ -57,7 +63,16 @@ typedef void (^MJLleidaNetResultBlock)(MJLleidaNetResult *result, NSError *error
 @property (nonatomic, strong, readonly) NSString *host;
 
 /** ************************************************************ **
- * @name API methods
+ * @name Generic API methods
+ ** ************************************************************ **/
+
+/**
+ * Performs a generic Lleida.net request.
+ **/
+- (void)performRequest:(MJLleidaNetRequest*)request completionBlock:(MJLleidaNetResultBlock)completionBlock;
+
+/** ************************************************************ **
+ * @name Specific API methods
  ** ************************************************************ **/
 
 /**
@@ -74,5 +89,18 @@ typedef void (^MJLleidaNetResultBlock)(MJLleidaNetResult *result, NSError *error
  * @param completionBlock A completion block.
  **/
 - (void)sendSMS:(NSString*)message phones:(NSArray*)phones completionBlock:(MJLleidaNetResultBlock)completionBlock;
+
+/**
+ * Requests the state of a sent message.
+ * @param identifier The identifier of the sent message.
+ * @param completionBlock A completion block.
+ **/
+- (void)stateOfMessageWithIdentifier:(NSString*)identifier completionBlock:(MJLleidaNetResultBlock)completionBlock;
+
+/**
+ * Fetches the incoming messages since last fetch.
+ * @param completionBlock A completion block.
+ **/
+- (void)incomingMessagesWithCompletionBlock:(MJLleidaNetResultBlock)completionBlock;
 
 @end

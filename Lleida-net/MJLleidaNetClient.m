@@ -48,39 +48,47 @@
     return self;
 }
 
+- (void)performRequest:(MJLleidaNetRequest*)request completionBlock:(MJLleidaNetResultBlock)completionBlock
+{
+    [self mjz_performRequest:request completionBlock:completionBlock];
+}
+
 - (void)userDetailsWithCompletionBlock:(MJLleidaNetResultBlock)completionBlock
 {
-    NSMutableString *xmlBody = [NSMutableString string];
-    
-    [xmlBody appendString:@"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>"];
-    [xmlBody appendString:@"<userinfo>"];
-    [xmlBody appendFormat:@"<user>%@</user>", _username];
-    [xmlBody appendFormat:@"<password>%@</password>", _password];
-    [xmlBody appendString:@"</userinfo>"];
-    
-    [self mjz_sendXML:[xmlBody copy] completionBlock:completionBlock];
+    MJLleidaNetUserDetailsRequest *request = [MJLleidaNetUserDetailsRequest new];
+    [self mjz_performRequest:request completionBlock:completionBlock];
 }
 
 - (void)sendSMS:(NSString*)message phones:(NSArray*)phones completionBlock:(MJLleidaNetResultBlock)completionBlock
 {
-    NSMutableString *xmlBody = [NSMutableString string];
+    MJLleidaNetSMSRequest *request = [MJLleidaNetSMSRequest new];
+    request.text = message;
+    request.recipients = phones;
     
-    [xmlBody appendString:@"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>"];
-    [xmlBody appendString:@"<sms>"];
-    [xmlBody appendFormat:@"<user>%@</user>", _username];
-    [xmlBody appendFormat:@"<password>%@</password>", _password];
-    [xmlBody appendString:@"<dst>"];
-    [phones enumerateObjectsUsingBlock:^(NSString *phone, NSUInteger idx, BOOL *stop) {
-        [xmlBody appendFormat:@"<num>%@</num>", phone];
-    }];
-    [xmlBody appendString:@"</dst>"];
-    [xmlBody appendFormat:@"<txt>%@</txt>", message];
-    [xmlBody appendString:@"</sms>"];
+    [self mjz_performRequest:request completionBlock:completionBlock];
+}
+
+- (void)stateOfMessageWithIdentifier:(NSString*)identifier completionBlock:(MJLleidaNetResultBlock)completionBlock
+{
+    MJLleidaNetMessageStatusRequest *request = [MJLleidaNetMessageStatusRequest new];
+    request.identifier = identifier;
     
-    [self mjz_sendXML:[xmlBody copy] completionBlock:completionBlock];
+    [self mjz_performRequest:request completionBlock:completionBlock];
+}
+
+- (void)incomingMessagesWithCompletionBlock:(MJLleidaNetResultBlock)completionBlock
+{
+    MJLleidaNetIncomingMessagesRequest*request = [MJLleidaNetIncomingMessagesRequest new];
+    [self mjz_performRequest:request completionBlock:completionBlock];
 }
 
 #pragma mark Private Methods
+
+- (void)mjz_performRequest:(MJLleidaNetRequest*)request completionBlock:(MJLleidaNetResultBlock)completionBlock
+{
+    NSString *xml = [request xmlWithUsername:_username password:_password];
+    [self mjz_sendXML:xml completionBlock:completionBlock];
+}
 
 - (void)mjz_sendXML:(NSString*)xml completionBlock:(MJLleidaNetResultBlock)completionBlock
 {
