@@ -1,5 +1,5 @@
 # Lleida.net-iOS
-iOS Client for Lleida.net services
+iOS client for Lleida.net services
 
 ## Instalation
 The easiest way of installing the Lleida.net SDK is to use Cocoa Pods:
