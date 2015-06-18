@@ -1,0 +1,28 @@
+{
+  "name": "Lleida.net",
+  "version": "0.1.0",
+  "summary": "iOS Client for Lleida.net services",
+  "description": "Simple iOS client for Lleida.net services.",
+  "homepage": "https://github.com/mobilejazz/Lleida.net-iOS",
+  "license": {
+    "type": "Apache License, Version 2.0",
+    "file": "LICENSE.txt"
+  },
+  "authors": {
+    "Mobile Jazz": "info@mobilejazz.cat"
+  },
+  "social_media_url": "http://twitter.com/mobilejazz",
+  "platforms": {
+    "ios": "7.0"
+  },
+  "source": {
+    "git": "https://github.com/mobilejazz/Lleida.net-iOS.git",
+    "tag": "0.1.0"
+  },
+  "source_files": "Lleida-net/*.{h,m}",
+  "frameworks": "Foundation",
+  "dependencies": {
+    "AFNetworking": ["2"]
+  },
+  "requires_arc": true
+}
