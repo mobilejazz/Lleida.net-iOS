@@ -6,7 +6,7 @@
   "homepage": "https://github.com/mobilejazz/Lleida.net-iOS",
   "license": {
     "type": "Apache License, Version 2.0",
-    "file": "LICENSE.txt"
+    "file": "LICENSE"
   },
   "authors": {
     "Mobile Jazz": "info@mobilejazz.cat"
@@ -22,7 +22,7 @@
   "source_files": "Lleida-net/*.{h,m}",
   "frameworks": "Foundation",
   "dependencies": {
-    "AFNetworking": ["2"]
+    "AFNetworking": ["~> 2.5"]
   },
   "requires_arc": true
 }
