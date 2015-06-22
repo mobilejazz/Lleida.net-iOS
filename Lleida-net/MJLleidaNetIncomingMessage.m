@@ -67,4 +67,14 @@
     return [NSString stringWithFormat:@"%@", [dictionary description]];
 }
 
+- (NSArray*)apx_descriptionKeys
+{
+    return @[key(identifier),
+             key(date),
+             key(source),
+             key(recipient),
+             key(text),
+             ];
+}
+
 @end

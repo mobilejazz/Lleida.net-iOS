@@ -33,4 +33,8 @@
  **/
 - (void)parser:(NSXMLParser*)parser didEndElement:(NSString*)elementName;
 
+
+- (NSArray*)apx_descriptionKeys;
+- (NSString*)apx_descriptionWithIndentationLevel:(NSInteger)indentation;
+
 @end

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3B90DAD759D79C5B322B2145 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 177FABE661054178AD86A66A /* libPods.a */; };
+		D2BA26DC1B3874DA003B6172 /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BA26DA1B3874DA003B6172 /* ResultViewController.m */; };
+		D2BA26DD1B3874DA003B6172 /* ResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2BA26DB1B3874DA003B6172 /* ResultViewController.xib */; };
 		D2E9AB241B32DAC4006D2CCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E9AB231B32DAC4006D2CCA /* main.m */; };
 		D2E9AB271B32DAC4006D2CCA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E9AB261B32DAC4006D2CCA /* AppDelegate.m */; };
 		D2E9AB2A1B32DAC4006D2CCA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E9AB291B32DAC4006D2CCA /* ViewController.m */; };
@@ -47,6 +49,9 @@
 		177FABE661054178AD86A66A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		44976471C58ED077EE4C1301 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		71EFF6E673B27DE4C4A3EE7C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D2BA26D91B3874DA003B6172 /* ResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultViewController.h; sourceTree = "<group>"; };
+		D2BA26DA1B3874DA003B6172 /* ResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultViewController.m; sourceTree = "<group>"; };
+		D2BA26DB1B3874DA003B6172 /* ResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultViewController.xib; sourceTree = "<group>"; };
 		D2E9AB1E1B32DAC4006D2CCA /* Lleida.net.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lleida.net.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E9AB221B32DAC4006D2CCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2E9AB231B32DAC4006D2CCA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -231,6 +236,9 @@
 			children = (
 				D2E9AB281B32DAC4006D2CCA /* ViewController.h */,
 				D2E9AB291B32DAC4006D2CCA /* ViewController.m */,
+				D2BA26D91B3874DA003B6172 /* ResultViewController.h */,
+				D2BA26DA1B3874DA003B6172 /* ResultViewController.m */,
+				D2BA26DB1B3874DA003B6172 /* ResultViewController.xib */,
 			);
 			name = Screens;
 			sourceTree = "<group>";
@@ -359,6 +367,7 @@
 				D2E9AB2D1B32DAC4006D2CCA /* Main.storyboard in Resources */,
 				D2E9AB321B32DAC4006D2CCA /* LaunchScreen.xib in Resources */,
 				D2E9AB2F1B32DAC4006D2CCA /* Images.xcassets in Resources */,
+				D2BA26DD1B3874DA003B6172 /* ResultViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +421,7 @@
 				D2E9AB6E1B32DAFB006D2CCA /* MJXMLObject.m in Sources */,
 				D2E9AB6B1B32DAFB006D2CCA /* MJLleidaNetResponse.m in Sources */,
 				D2E9AB2A1B32DAC4006D2CCA /* ViewController.m in Sources */,
+				D2BA26DC1B3874DA003B6172 /* ResultViewController.m in Sources */,
 				D2E9AB8B1B332227006D2CCA /* MJLleidaNetMessageStatus.m in Sources */,
 				D2E9AB271B32DAC4006D2CCA /* AppDelegate.m in Sources */,
 				D2E9AB6C1B32DAFB006D2CCA /* MJLleidaNetResult.m in Sources */,

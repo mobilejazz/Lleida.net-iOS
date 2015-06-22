@@ -80,4 +80,15 @@
     return [NSString stringWithFormat:@"%@", [dictionary description]];
 }
 
+- (NSArray*)apx_descriptionKeys
+{
+    return @[key(identifier),
+             key(status),
+             key(statusDescription),
+             key(lastUpdate),
+             key(credits),
+             key(parts),
+             ];
+}
+
 @end

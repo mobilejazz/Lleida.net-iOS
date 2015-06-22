@@ -111,4 +111,20 @@
     return [NSString stringWithFormat:@"%@", [dictionary description]];
 }
 
+- (NSArray*)apx_descriptionKeys
+{
+    return @[key(name),
+             key(credit),
+             key(status),
+             key(created),
+             key(lastOperation),
+             key(contactName),
+             key(phone),
+             key(email),
+             key(organization),
+             key(cif),
+             key(phoneNumber),
+             ];
+}
+
 @end

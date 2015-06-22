@@ -93,9 +93,22 @@
                                                                    key(status),
                                                                    key(message),
                                                                    key(userInfo),
+                                                                   key(messageStatus),
+                                                                   key(incomingMessages),
                                                                    ]];
     
     return [NSString stringWithFormat:@"%@", [dictionary description]];
+}
+
+- (NSArray*)apx_descriptionKeys
+{
+    return @[key(action),
+             key(status),
+             key(message),
+             key(userInfo),
+             key(messageStatus),
+             key(incomingMessages),
+             ];
 }
 
 @end

@@ -10,6 +10,11 @@
 #import "MJLleidaNetClient.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
+#import "ResultViewController.h"
+
+#define TEST_MESSAGE    @"Hello world message"
+#define TEST_URL        @"http://www.lleida.net/en"
+
 typedef NS_ENUM(NSUInteger, Section)
 {
     SectionConfiguration,
@@ -20,15 +25,8 @@ typedef NS_ENUM(NSUInteger, ActionRow)
 {
     ActionRowUserDetails,
     ActionRowSendSMS,
-};
-
-typedef NS_ENUM(NSUInteger, TextFieldType)
-{
-    TextFieldTypeUnknown,
-    TextFieldTypeUsername,
-    TextFieldTypePassword,
-    TextFieldTypeNumber,
-    TextFieldTypeSMS,
+    ActionRowSendWAP,
+    ActionRowIncomingMessages,
 };
 
 static NSString * const kUsernameKey = @"com.mobilejazz.Lleida-net.username";
@@ -48,14 +46,12 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
     
     __block UITextField *_numberField;
     __block UITextField *_messageField;
+    __block UITextField *_urlField;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    _usernameField.tag = TextFieldTypeUsername;
-    _passwordField.tag = TextFieldTypePassword;
     
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:kUsernameKey];
     NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:kPasswordKey];
@@ -93,7 +89,36 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
             if (error)
                 [self mjz_showAlertWithTitle:@"Error" message:error.localizedDescription];
             else
-                [self mjz_showAlertWithTitle:@"Result" message:result.description];
+                [self mjz_showResult:result];
+        }];
+    }
+}
+
+- (void)mjz_sendWAP
+{
+    NSString *phone = _numberField.text;
+    NSString *message = _messageField.text;
+    NSString *url = _urlField.text;
+    
+    if (phone.length == 0 || message.length == 0 || url.length == 0)
+    {
+        [self mjz_showAlertWithTitle:@"Failed" message:@"Phone or message or url were empty. Any SMS has not been sent."];
+    }
+    else
+    {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
+        MJLleidaNetWAPRequest *request = [MJLleidaNetWAPRequest new];
+        request.recipients = @[phone];
+        request.text = message;
+        request.wapURL = [NSURL URLWithString:url];
+        [_client performRequest:request completionBlock:^(MJLleidaNetResult *result, NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            
+            if (error)
+                [self mjz_showAlertWithTitle:@"Error" message:error.localizedDescription];
+            else
+                [self mjz_showResult:result];
         }];
     }
     
@@ -171,7 +196,7 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
                     if (error)
                         [self mjz_showAlertWithTitle:@"Error" message:error.localizedDescription];
                     else
-                        [self mjz_showAlertWithTitle:@"Result" message:result.description];
+                        [self mjz_showResult:result];
                 }];
             }
             else if (row == ActionRowSendSMS)
@@ -183,16 +208,15 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
                     textField.placeholder = @"Phone number";
                     textField.keyboardType = UIKeyboardTypePhonePad;
                     textField.delegate = self;
-                    textField.tag = TextFieldTypeNumber;
                 }];
                 
                 [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
                     _messageField = textField;
                     textField.placeholder = @"Message";
+                    textField.text = TEST_MESSAGE;
                     textField.keyboardType = UIKeyboardTypeDefault;
                     textField.delegate = self;
                     textField.returnKeyType = UIReturnKeySend;
-                    textField.tag = TextFieldTypePassword;
                 }];
                 
                 [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel"
@@ -212,8 +236,73 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
                 
                 [self presentViewController:alertController animated:YES completion:nil];
             }
+            else if (row == ActionRowSendWAP)
+            {
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Send WAP" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                
+                [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                    _numberField = textField;
+                    textField.placeholder = @"Phone number";
+                    textField.text = nil;
+                    textField.keyboardType = UIKeyboardTypePhonePad;
+                    textField.delegate = self;
+                }];
+                
+                [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                    _messageField = textField;
+                    textField.placeholder = @"Message";
+                    textField.text = TEST_MESSAGE;
+                    textField.keyboardType = UIKeyboardTypeDefault;
+                    textField.delegate = self;
+                    textField.returnKeyType = UIReturnKeySend;
+                }];
+                
+                [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                    _urlField = textField;
+                    textField.placeholder = @"URL";
+                    textField.text = TEST_URL;
+                    textField.keyboardType = UIKeyboardTypeDefault;
+                    textField.delegate = self;
+                    textField.returnKeyType = UIReturnKeySend;
+                }];
+                
+                [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                                                    style:UIAlertActionStyleCancel
+                                                                  handler:^(UIAlertAction *action) {
+                                                                      _numberField = nil;
+                                                                      _messageField = nil;
+                                                                  }]];
+                
+                [alertController addAction:[UIAlertAction actionWithTitle:@"Send"
+                                                                    style:UIAlertActionStyleDestructive
+                                                                  handler:^(UIAlertAction *action) {
+                                                                      [self mjz_sendWAP];
+                                                                      _numberField = nil;
+                                                                      _messageField = nil;
+                                                                  }]];
+                
+                [self presentViewController:alertController animated:YES completion:nil];
+            }
+            else if (row == ActionRowIncomingMessages)
+            {
+                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                [_client api_incomingMessagesWithCompletionBlock:^(MJLleidaNetResult *result, NSError *error) {
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                    
+                    if (error)
+                        [self mjz_showAlertWithTitle:@"Error" message:error.localizedDescription];
+                    else
+                        [self mjz_showResult:result];
+                }];
+            }
         }
     }
+}
+
+- (void)mjz_showResult:(MJLleidaNetResult*)result
+{
+    ResultViewController *vc = [[ResultViewController alloc] initWithResult:result];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
