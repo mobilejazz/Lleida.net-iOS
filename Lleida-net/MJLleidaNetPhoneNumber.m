@@ -51,7 +51,7 @@
 - (NSString*)description
 {
     #define key(key) NSStringFromSelector(@selector(key))
-    NSDictionary *dictionary = [self dictionaryWithValuesForKeys:@[key(phoneNumber),
+    NSDictionary *dictionary = [self dictionaryWithValuesForKeys:@[key(number),
                                                                    ]];
     
     return [NSString stringWithFormat:@"%@", [dictionary description]];
