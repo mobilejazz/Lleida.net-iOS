@@ -86,8 +86,8 @@
     // Recipients
     [xmlBody appendString:@"<dst>"];
     [_recipients enumerateObjectsUsingBlock:^(NSString *phone, NSUInteger idx, BOOL *stop) {
-        phone = [phone stringByReplacingOccurrencesOfString:@" " withString:@""];
-        [xmlBody appendFormat:@"<num>%@</num>", phone];
+        NSString *fixedPhone = [phone stringByReplacingOccurrencesOfString:@" " withString:@""];
+        [xmlBody appendFormat:@"<num>%@</num>", fixedPhone];
     }];
     [xmlBody appendString:@"</dst>"];
     
