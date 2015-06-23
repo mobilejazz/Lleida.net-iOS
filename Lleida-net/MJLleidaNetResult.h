@@ -17,6 +17,8 @@
 #import "MJXMLObject.h"
 
 #import "MJLleidaNetUserInfo.h"
+#import "MJLleidaNetMessageStatus.h"
+#import "MJLleidaNetIncomingMessage.h"
 
 typedef NS_ENUM(NSInteger, MJLleidaNetResultStatus)
 {
@@ -45,5 +47,7 @@ typedef NS_ENUM(NSInteger, MJLleidaNetResultStatus)
 @property (nonatomic, strong) NSString *message;
 
 @property (nonatomic, strong) MJLleidaNetUserInfo *userInfo;
+@property (nonatomic, strong) MJLleidaNetMessageStatus *messageStatus;
+@property (nonatomic, strong) NSArray *incomingMessages;
 
 @end

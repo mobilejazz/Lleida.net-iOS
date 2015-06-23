@@ -16,11 +16,12 @@
 
 #import "MJLleidaNetResult.h"
 
-#import "MJLleidaNetXML.h"
+#import "MJXMLObject+Debug.h"
 
 @implementation MJLleidaNetResult
 {
     NSMutableString *_mutableString;
+    NSMutableArray *_array;
 }
 
 #pragma mark - Protocols
@@ -28,10 +29,25 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
-    if ([elementName isEqualToString:kUserInfoKey])
+    if ([elementName isEqualToString:@"userinfo"])
     {
-        _userInfo = [[MJLleidaNetUserInfo alloc] initWithParent:self xmlKey:kUserInfoKey];
+        _userInfo = [[MJLleidaNetUserInfo alloc] initWithParent:self xmlKey:@"userinfo"];
         parser.delegate = _userInfo;
+    }
+    else if ([elementName isEqualToString:@"mt_status"])
+    {
+        _messageStatus = [[MJLleidaNetMessageStatus alloc] initWithParent:self xmlKey:@"mt_status"];
+        parser.delegate = _messageStatus;
+    }
+    else if ([elementName isEqualToString:@"mo_list"])
+    {
+        _array = [NSMutableArray array];
+    }
+    else if ([elementName isEqualToString:@"mo"])
+    {
+        MJLleidaNetIncomingMessage *incomingMessage = [[MJLleidaNetIncomingMessage alloc] initWithParent:self xmlKey:@"mo"];
+        parser.delegate = incomingMessage;
+        [_array addObject:incomingMessage];
     }
     else
     {
@@ -48,17 +64,21 @@
 {
     // If finishing result, return to the previous delegate
     
-    if ([elementName isEqualToString:kActionKey])
+    if ([elementName isEqualToString:@"action"])
     {
         _action = [_mutableString copy];
     }
-    else if ([elementName isEqualToString:kStatusKey])
+    else if ([elementName isEqualToString:@"status"])
     {
         _status = [[_mutableString copy] integerValue];
     }
-    else if ([elementName isEqualToString:kMsgKey])
+    else if ([elementName isEqualToString:@"msg"])
     {
         _message = [_mutableString copy];
+    }
+    else if ([elementName isEqualToString:@"mo_list"])
+    {
+        _incomingMessages = [_array copy];
     }
     
     _mutableString = nil;
@@ -73,9 +93,22 @@
                                                                    key(status),
                                                                    key(message),
                                                                    key(userInfo),
+                                                                   key(messageStatus),
+                                                                   key(incomingMessages),
                                                                    ]];
     
     return [NSString stringWithFormat:@"%@", [dictionary description]];
+}
+
+- (NSArray*)apx_descriptionKeys
+{
+    return @[key(action),
+             key(status),
+             key(message),
+             key(userInfo),
+             key(messageStatus),
+             key(incomingMessages),
+             ];
 }
 
 @end

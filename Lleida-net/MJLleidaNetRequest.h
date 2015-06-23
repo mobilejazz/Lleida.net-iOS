@@ -16,22 +16,8 @@
 
 #import <Foundation/Foundation.h>
 
-/**
- * Superclass for XML parseable objects.
- **/
-@interface MJXMLObject : NSObject <NSXMLParserDelegate>
+@interface MJLleidaNetRequest : NSObject
 
-/**
- * Default initializer
- **/
-- (id)initWithParent:(id <NSXMLParserDelegate>)parent xmlKey:(NSString*)xmlKey;
-
-@property (nonatomic, weak) id <NSXMLParserDelegate> parent;
-@property (nonatomic, strong) NSString *xmlKey;
-
-/**
- * Call this method when finishing an element.
- **/
-- (void)parser:(NSXMLParser*)parser didEndElement:(NSString*)elementName;
+- (NSString*)xmlWithUsername:(NSString*)username password:(NSString*)password;
 
 @end

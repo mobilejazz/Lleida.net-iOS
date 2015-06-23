@@ -14,11 +14,10 @@
 // limitations under the License.
 //
 
-#import "MJLleidaNetPhoneNumber.h"
-
+#import "MJLleidaNetMessageStatus.h"
 #import "MJXMLObject+Debug.h"
 
-@implementation MJLleidaNetPhoneNumber
+@implementation MJLleidaNetMessageStatus
 {
     NSMutableString *_mutableString;
 }
@@ -37,10 +36,30 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
-{    
-    if ([elementName isEqualToString:@"num"])
+{
+    if ([elementName isEqualToString:@"mt_id"])
     {
-        _number = [_mutableString copy];
+        _identifier = [_mutableString copy];
+    }
+    else if ([elementName isEqualToString:@"status_code"])
+    {
+        _status = [[_mutableString copy] integerValue];
+    }
+    else if ([elementName isEqualToString:@"status_desc"])
+    {
+        _statusDescription = [_mutableString copy];
+    }
+    else if ([elementName isEqualToString:@"tm_last_update"])
+    {
+        _lastUpdate = [NSDate dateWithTimeIntervalSince1970:[[_mutableString copy] doubleValue]];
+    }
+    else if ([elementName isEqualToString:@"credits"])
+    {
+        _credits = [[_mutableString copy] doubleValue];
+    }
+    else if ([elementName isEqualToString:@"num_parts"])
+    {
+        _parts = [[_mutableString copy] integerValue];
     }
     
     _mutableString = nil;
@@ -51,7 +70,12 @@
 - (NSString*)description
 {
     #define key(key) NSStringFromSelector(@selector(key))
-    NSDictionary *dictionary = [self dictionaryWithValuesForKeys:@[key(number),
+    NSDictionary *dictionary = [self dictionaryWithValuesForKeys:@[key(identifier),
+                                                                   key(status),
+                                                                   key(statusDescription),
+                                                                   key(lastUpdate),
+                                                                   key(credits),
+                                                                   key(parts),
                                                                    ]];
     
     return [NSString stringWithFormat:@"%@", [dictionary description]];
@@ -59,9 +83,13 @@
 
 - (NSArray*)apx_descriptionKeys
 {
-    return @[key(number),
+    return @[key(identifier),
+             key(status),
+             key(statusDescription),
+             key(lastUpdate),
+             key(credits),
+             key(parts),
              ];
 }
-
 
 @end

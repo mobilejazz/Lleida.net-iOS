@@ -14,24 +14,8 @@
 // limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import "MJLleidaNetRequest.h"
 
-/**
- * Superclass for XML parseable objects.
- **/
-@interface MJXMLObject : NSObject <NSXMLParserDelegate>
-
-/**
- * Default initializer
- **/
-- (id)initWithParent:(id <NSXMLParserDelegate>)parent xmlKey:(NSString*)xmlKey;
-
-@property (nonatomic, weak) id <NSXMLParserDelegate> parent;
-@property (nonatomic, strong) NSString *xmlKey;
-
-/**
- * Call this method when finishing an element.
- **/
-- (void)parser:(NSXMLParser*)parser didEndElement:(NSString*)elementName;
+@interface MJLleidaNetUserDetailsRequest : MJLleidaNetRequest
 
 @end

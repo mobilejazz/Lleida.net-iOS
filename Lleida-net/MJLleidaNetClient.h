@@ -15,8 +15,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #import "MJLleidaNetResult.h"
+
+#import "MJLleidaNetUserDetailsRequest.h"
+#import "MJLleidaNetSMSRequest.h"
+#import "MJLleidaNetWAPRequest.h"
+#import "MJLleidaNetMessageStatusRequest.h"
+#import "MJLleidaNetIncomingMessagesRequest.h"
+
+/**
+ * Returns the concatenated string including the identifier and phone to use as message identifier.
+ **/
+inline NSString* MJLleidaNetMsgIdentifier(NSString *identifier, NSString *phone)
+{
+    return [NSString stringWithFormat:@"%@:%@", identifier, phone];
+}
 
 typedef void (^MJLleidaNetResultBlock)(MJLleidaNetResult *result, NSError *error);
 
@@ -57,7 +72,20 @@ typedef void (^MJLleidaNetResultBlock)(MJLleidaNetResult *result, NSError *error
 @property (nonatomic, strong, readonly) NSString *host;
 
 /** ************************************************************ **
- * @name API methods
+ * @name Generic API methods
+ ** ************************************************************ **/
+
+/**
+ * Performs a generic Lleida.net request.
+ **/
+- (void)performRequest:(MJLleidaNetRequest*)request completionBlock:(MJLleidaNetResultBlock)completionBlock;
+
+@end
+
+@interface MJLleidaNetClient (API)
+
+/** ************************************************************ **
+ * @name Specific API methods
  ** ************************************************************ **/
 
 /**
@@ -65,14 +93,36 @@ typedef void (^MJLleidaNetResultBlock)(MJLleidaNetResult *result, NSError *error
  * @param completionBlock A completion block.
  * @discussion If success, the user details will be located in the `userInfo` property of the result.
  **/
-- (void)userDetailsWithCompletionBlock:(MJLleidaNetResultBlock)completionBlock;
+- (void)api_userDetailsWithCompletionBlock:(MJLleidaNetResultBlock)completionBlock;
 
 /**
  * Send a SMS message to multiple phones.
  * @param message The message to send.
- * @param phones An array of strings of phone numbers.
+ * @param recipients An array of strings of phone numbers.
  * @param completionBlock A completion block.
  **/
-- (void)sendSMS:(NSString*)message phones:(NSArray*)phones completionBlock:(MJLleidaNetResultBlock)completionBlock;
+- (void)api_sendSMS:(NSString*)message recipients:(NSArray*)recipients completionBlock:(MJLleidaNetResultBlock)completionBlock;
+
+/**
+ * Send a WAP message to multiple phones.
+ * @param message The message to send.
+ * @param recipients An array of strings of phone numbers.
+ * @param url The url to send.
+ * @param completionBlock A completion block.
+ **/
+- (void)api_sendWAP:(NSString*)message recipients:(NSArray*)recipients url:(NSURL*)url completionBlock:(MJLleidaNetResultBlock)completionBlock;
+
+/**
+ * Requests the state of a sent message.
+ * @param identifier The identifier of the sent message.
+ * @param completionBlock A completion block.
+ **/
+- (void)api_stateOfMessageWithIdentifier:(NSString*)identifier completionBlock:(MJLleidaNetResultBlock)completionBlock;
+
+/**
+ * Fetches the incoming messages since last fetch.
+ * @param completionBlock A completion block.
+ **/
+- (void)api_incomingMessagesWithCompletionBlock:(MJLleidaNetResultBlock)completionBlock;
 
 @end

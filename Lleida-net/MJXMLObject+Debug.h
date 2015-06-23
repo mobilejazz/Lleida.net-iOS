@@ -14,24 +14,18 @@
 // limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import "MJXMLObject.h"
+
+@interface MJXMLObject (Debug)
 
 /**
- * Superclass for XML parseable objects.
+ * Return an array of property names. Subclasses must override to provide debug logs.
  **/
-@interface MJXMLObject : NSObject <NSXMLParserDelegate>
+- (NSArray*)apx_descriptionKeys;
 
 /**
- * Default initializer
+ * Debug description.
  **/
-- (id)initWithParent:(id <NSXMLParserDelegate>)parent xmlKey:(NSString*)xmlKey;
-
-@property (nonatomic, weak) id <NSXMLParserDelegate> parent;
-@property (nonatomic, strong) NSString *xmlKey;
-
-/**
- * Call this method when finishing an element.
- **/
-- (void)parser:(NSXMLParser*)parser didEndElement:(NSString*)elementName;
+- (NSString*)apx_description;
 
 @end

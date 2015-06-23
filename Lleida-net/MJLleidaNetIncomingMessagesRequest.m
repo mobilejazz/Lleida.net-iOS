@@ -14,24 +14,21 @@
 // limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import "MJLleidaNetIncomingMessagesRequest.h"
 
-/**
- * Superclass for XML parseable objects.
- **/
-@interface MJXMLObject : NSObject <NSXMLParserDelegate>
+@implementation MJLleidaNetIncomingMessagesRequest
 
-/**
- * Default initializer
- **/
-- (id)initWithParent:(id <NSXMLParserDelegate>)parent xmlKey:(NSString*)xmlKey;
-
-@property (nonatomic, weak) id <NSXMLParserDelegate> parent;
-@property (nonatomic, strong) NSString *xmlKey;
-
-/**
- * Call this method when finishing an element.
- **/
-- (void)parser:(NSXMLParser*)parser didEndElement:(NSString*)elementName;
+- (NSString*)xmlWithUsername:(NSString*)username password:(NSString*)password
+{
+    NSMutableString *xmlBody = [NSMutableString string];
+    
+    [xmlBody appendString:@"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>"];
+    [xmlBody appendString:@"<get_new_incoming_mo>"];
+    [xmlBody appendFormat:@"<user>%@</user>", username];
+    [xmlBody appendFormat:@"<password>%@</password>", password];
+    [xmlBody appendString:@"</get_new_incoming_mo>"];
+    
+    return [xmlBody copy];
+}
 
 @end
