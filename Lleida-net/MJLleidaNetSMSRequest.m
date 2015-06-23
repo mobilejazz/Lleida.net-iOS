@@ -132,6 +132,7 @@ NSString* NSStringFromMJLleidaNetScheduleDate(NSDate *date)
     // Recipients
     [xmlBody appendString:@"<dst>"];
     [_recipients enumerateObjectsUsingBlock:^(NSString *phone, NSUInteger idx, BOOL *stop) {
+        phone = [phone stringByReplacingOccurrencesOfString:@" " withString:@""];
         [xmlBody appendFormat:@"<num>%@</num>", phone];
     }];
     [xmlBody appendString:@"</dst>"];
