@@ -7,6 +7,7 @@
 //
 
 #import "ResultViewController.h"
+#import "MJXMLObject+Debug.h"
 
 @interface ResultViewController ()
 
@@ -32,15 +33,7 @@
     
     self.title = _result.action;
     
-    NSString *string = [_result apx_descriptionWithIndentationLevel:0];
-//    string = [string stringByReplacingOccurrencesOfString:@"\"<null>\"" withString:@"null"];
-//    string = [string stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
-//    string = [string stringByReplacingOccurrencesOfString:@"\\\"" withString:@"\""];
-//
-//    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[string dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
-//    
-//    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
-//    NSString *prettyJson = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString *string = [_result apx_description];
     
     self.textView.text = string;
 }

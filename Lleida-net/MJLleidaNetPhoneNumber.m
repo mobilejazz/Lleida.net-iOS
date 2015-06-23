@@ -16,7 +16,7 @@
 
 #import "MJLleidaNetPhoneNumber.h"
 
-#import "MJLleidaNetXML.h"
+#import "MJXMLObject+Debug.h"
 
 @implementation MJLleidaNetPhoneNumber
 {
@@ -38,7 +38,7 @@
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {    
-    if ([elementName isEqualToString:kNumKey])
+    if ([elementName isEqualToString:@"num"])
     {
         _number = [_mutableString copy];
     }

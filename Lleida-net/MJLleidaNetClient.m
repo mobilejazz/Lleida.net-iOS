@@ -94,11 +94,21 @@
     [self performRequest:request completionBlock:completionBlock];
 }
 
-- (void)api_sendSMS:(NSString*)message phones:(NSArray*)phones completionBlock:(MJLleidaNetResultBlock)completionBlock
+- (void)api_sendSMS:(NSString*)message recipients:(NSArray*)recipients completionBlock:(MJLleidaNetResultBlock)completionBlock
 {
     MJLleidaNetSMSRequest *request = [MJLleidaNetSMSRequest new];
     request.text = message;
-    request.recipients = phones;
+    request.recipients = recipients;
+    
+    [self performRequest:request completionBlock:completionBlock];
+}
+
+- (void)api_sendWAP:(NSString*)message recipients:(NSArray*)recipients url:(NSURL*)url completionBlock:(MJLleidaNetResultBlock)completionBlock
+{
+    MJLleidaNetWAPRequest *request = [MJLleidaNetWAPRequest new];
+    request.text = message;
+    request.url = url;
+    request.recipients = recipients;
     
     [self performRequest:request completionBlock:completionBlock];
 }

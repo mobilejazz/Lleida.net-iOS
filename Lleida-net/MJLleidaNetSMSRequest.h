@@ -28,11 +28,14 @@ extern MJLleidaNetLanguageCode * const MJLLeidaNetLanguageCodeItalian;
 extern MJLleidaNetLanguageCode * const MJLLeidaNetLanguageCodeDutch;
 extern MJLleidaNetLanguageCode * const MJLLeidaNetLanguageCodePortugese;
 
-@interface MJLleidaNetSMSDeliveryRecipt : NSObject
+@interface MJLleidaNetSMSDeliveryReceipt : NSObject
+
++ (MJLleidaNetSMSDeliveryReceipt*)deliveryReceiptWithEmail:(NSString*)email;
++ (MJLleidaNetSMSDeliveryReceipt*)deliveryReceiptWithEmail:(NSString*)email language:(MJLleidaNetLanguageCode*)language;
 
 @property (nonatomic, strong) NSString *email;
 @property (nonatomic, strong) MJLleidaNetLanguageCode *languageCode;
-@property (nonatomic, assign) BOOL requestReciptCertificate;
+@property (nonatomic, assign) BOOL requestReceiptCertificate;
 @property (nonatomic, strong) NSString *certificateName;
 @property (nonatomic, strong) NSString *certificateId;
 
@@ -42,9 +45,11 @@ extern MJLleidaNetLanguageCode * const MJLLeidaNetLanguageCodePortugese;
 
 @interface MJLleidaNetSMSRequest : MJLleidaNetRequest
 
++ (MJLleidaNetSMSRequest*)requestWithText:(NSString*)text recipients:(NSArray*)recipients;
+
 @property (nonatomic, assign) BOOL allowAnswer;
 @property (nonatomic, strong) NSString *dataCoding;
-@property (nonatomic, strong) MJLleidaNetSMSDeliveryRecipt *deliveryRecipt;
+@property (nonatomic, strong) MJLleidaNetSMSDeliveryReceipt *deliveryRecipt;
 @property (nonatomic, strong) NSArray *recipients;
 @property (nonatomic, strong) NSString *identifier;
 @property (nonatomic, strong) NSDate *scheduleDate;

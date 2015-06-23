@@ -15,6 +15,7 @@
 //
 
 #import "MJLleidaNetMessageStatus.h"
+#import "MJXMLObject+Debug.h"
 
 @implementation MJLleidaNetMessageStatus
 {

@@ -16,7 +16,9 @@
 
 #import "MJLleidaNetRequest.h"
 
-@interface MJLleidaNetWAPDeliveryRecipt : NSObject
+@interface MJLleidaNetWAPDeliveryReceipt : NSObject
+
++ (MJLleidaNetWAPDeliveryReceipt*)deliveryReceiptWithEmail:(NSString*)email;
 
 @property (nonatomic, strong) NSString *email;
 @property (nonatomic, strong) NSString *certificateName;
@@ -28,10 +30,12 @@
 
 @interface MJLleidaNetWAPRequest : MJLleidaNetRequest
 
-@property (nonatomic, strong) MJLleidaNetWAPDeliveryRecipt *deliveryRecipt;
++ (MJLleidaNetWAPRequest*)requestWithText:(NSString*)text url:(NSURL*)url recipients:(NSArray*)recipients;
+
+@property (nonatomic, strong) MJLleidaNetWAPDeliveryReceipt *deliveryRecipt;
 @property (nonatomic, strong) NSArray *recipients;
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSString *identifier;
-@property (nonatomic, strong) NSURL *wapURL;
+@property (nonatomic, strong) NSURL *url;
 
 @end

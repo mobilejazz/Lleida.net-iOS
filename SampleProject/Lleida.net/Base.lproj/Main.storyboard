@@ -11,10 +11,10 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="AIT-6f-yRd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <sections>
-                            <tableViewSection headerTitle="    Configuration" id="tzK-qT-yhe">
+                            <tableViewSection headerTitle="    Account" id="tzK-qT-yhe">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="cLR-Cc-nHP">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -24,7 +24,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zl4-xm-mJc">
                                                     <rect key="frame" x="15" y="11" width="79" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="user@email.com" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kHy-or-JAU">
@@ -57,7 +57,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iot-Mg-xjL">
                                                     <rect key="frame" x="15" y="11" width="76" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tcP-eb-VBa">
@@ -79,6 +79,76 @@
                                                 <constraint firstAttribute="trailing" secondItem="tcP-eb-VBa" secondAttribute="trailing" constant="15" id="jXP-Nz-w0l"/>
                                                 <constraint firstAttribute="centerY" secondItem="iot-Mg-xjL" secondAttribute="centerY" id="lbw-7c-e2r"/>
                                                 <constraint firstItem="iot-Mg-xjL" firstAttribute="leading" secondItem="P54-wk-Vij" secondAttribute="leading" constant="15" id="vCl-F4-pvI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="    Options" id="7iI-ZV-6Vv">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Tt3-O9-J2K">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tt3-O9-J2K" id="C3m-1X-fq2">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Source name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vZ-Ec-HsK">
+                                                    <rect key="frame" x="15" y="11" width="102" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name or empty for default" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mKq-jE-1TC">
+                                                    <rect key="frame" x="125" y="7" width="235" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="IiQ-1M-Fke"/>
+                                                    </constraints>
+                                                    <color key="textColor" red="0.16862745100000001" green="0.4431372549" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="GB0-4X-iR6" id="zV2-yv-fhb"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="4vZ-Ec-HsK" secondAttribute="centerY" id="Bvu-6j-URv"/>
+                                                <constraint firstItem="4vZ-Ec-HsK" firstAttribute="leading" secondItem="C3m-1X-fq2" secondAttribute="leading" constant="15" id="RRt-XR-uew"/>
+                                                <constraint firstItem="mKq-jE-1TC" firstAttribute="leading" secondItem="4vZ-Ec-HsK" secondAttribute="trailing" constant="8" id="Xek-OC-vxi"/>
+                                                <constraint firstAttribute="trailing" secondItem="mKq-jE-1TC" secondAttribute="trailing" constant="15" id="ekb-4N-agx"/>
+                                                <constraint firstAttribute="centerY" secondItem="mKq-jE-1TC" secondAttribute="centerY" id="oky-CS-SIQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Puo-HC-cPJ">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Puo-HC-cPJ" id="Y9E-2F-ZtA">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery recipt" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyg-DB-tNm">
+                                                    <rect key="frame" x="15" y="11" width="110" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="delivery.recipt@mail.com" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QBb-zb-Lyr">
+                                                    <rect key="frame" x="133" y="7" width="227" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="vAG-qn-S4k"/>
+                                                    </constraints>
+                                                    <color key="textColor" red="0.16862745100000001" green="0.4431372549" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="GB0-4X-iR6" id="KVh-GL-gVu"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="QBb-zb-Lyr" secondAttribute="trailing" constant="15" id="9VI-qd-AEg"/>
+                                                <constraint firstItem="QBb-zb-Lyr" firstAttribute="leading" secondItem="hyg-DB-tNm" secondAttribute="trailing" constant="8" id="I5R-df-7cZ"/>
+                                                <constraint firstAttribute="centerY" secondItem="hyg-DB-tNm" secondAttribute="centerY" id="fOj-Dy-Ok1"/>
+                                                <constraint firstAttribute="centerY" secondItem="QBb-zb-Lyr" secondAttribute="centerY" id="kRR-I5-mom"/>
+                                                <constraint firstItem="hyg-DB-tNm" firstAttribute="leading" secondItem="Y9E-2F-ZtA" secondAttribute="leading" constant="15" id="wXp-tE-YRF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -156,7 +226,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Mobile Jazz - Lleida.net" id="jhO-0A-VjV"/>
                     <connections>
+                        <outlet property="_deliverReciptField" destination="QBb-zb-Lyr" id="Uhl-G8-pIT"/>
                         <outlet property="_passwordField" destination="tcP-eb-VBa" id="COL-3s-ckX"/>
+                        <outlet property="_sourceNameField" destination="mKq-jE-1TC" id="IOG-Dx-wJp"/>
                         <outlet property="_usernameField" destination="kHy-or-JAU" id="UlU-Gn-evB"/>
                     </connections>
                 </tableViewController>

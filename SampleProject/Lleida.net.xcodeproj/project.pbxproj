@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3B90DAD759D79C5B322B2145 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 177FABE661054178AD86A66A /* libPods.a */; };
+		D20322B11B394F2500125C81 /* MJXMLObject+Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = D20322B01B394F2500125C81 /* MJXMLObject+Debug.m */; };
 		D2BA26DC1B3874DA003B6172 /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BA26DA1B3874DA003B6172 /* ResultViewController.m */; };
 		D2BA26DD1B3874DA003B6172 /* ResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2BA26DB1B3874DA003B6172 /* ResultViewController.xib */; };
 		D2E9AB241B32DAC4006D2CCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E9AB231B32DAC4006D2CCA /* main.m */; };
@@ -49,6 +50,8 @@
 		177FABE661054178AD86A66A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		44976471C58ED077EE4C1301 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		71EFF6E673B27DE4C4A3EE7C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D20322AF1B394F2500125C81 /* MJXMLObject+Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MJXMLObject+Debug.h"; sourceTree = "<group>"; };
+		D20322B01B394F2500125C81 /* MJXMLObject+Debug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MJXMLObject+Debug.m"; sourceTree = "<group>"; };
 		D2BA26D91B3874DA003B6172 /* ResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultViewController.h; sourceTree = "<group>"; };
 		D2BA26DA1B3874DA003B6172 /* ResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultViewController.m; sourceTree = "<group>"; };
 		D2BA26DB1B3874DA003B6172 /* ResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultViewController.xib; sourceTree = "<group>"; };
@@ -75,7 +78,6 @@
 		D2E9AB631B32DAFB006D2CCA /* MJLleidaNetResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJLleidaNetResult.m; sourceTree = "<group>"; };
 		D2E9AB641B32DAFB006D2CCA /* MJLleidaNetUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJLleidaNetUserInfo.h; sourceTree = "<group>"; };
 		D2E9AB651B32DAFB006D2CCA /* MJLleidaNetUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJLleidaNetUserInfo.m; sourceTree = "<group>"; };
-		D2E9AB661B32DAFB006D2CCA /* MJLleidaNetXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJLleidaNetXML.h; sourceTree = "<group>"; };
 		D2E9AB671B32DAFB006D2CCA /* MJXMLObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJXMLObject.h; sourceTree = "<group>"; };
 		D2E9AB681B32DAFB006D2CCA /* MJXMLObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJXMLObject.m; sourceTree = "<group>"; };
 		D2E9AB6F1B32E2B9006D2CCA /* MJNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJNavigationController.h; sourceTree = "<group>"; };
@@ -205,6 +207,8 @@
 				D2E9AB7E1B3316AD006D2CCA /* Responses */,
 				D2E9AB671B32DAFB006D2CCA /* MJXMLObject.h */,
 				D2E9AB681B32DAFB006D2CCA /* MJXMLObject.m */,
+				D20322AF1B394F2500125C81 /* MJXMLObject+Debug.h */,
+				D20322B01B394F2500125C81 /* MJXMLObject+Debug.m */,
 			);
 			name = "Lleida-net";
 			path = "../../Lleida-net";
@@ -246,7 +250,6 @@
 		D2E9AB7E1B3316AD006D2CCA /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				D2E9AB661B32DAFB006D2CCA /* MJLleidaNetXML.h */,
 				D2E9AB601B32DAFB006D2CCA /* MJLleidaNetResponse.h */,
 				D2E9AB611B32DAFB006D2CCA /* MJLleidaNetResponse.m */,
 				D2E9AB621B32DAFB006D2CCA /* MJLleidaNetResult.h */,
@@ -425,6 +428,7 @@
 				D2E9AB8B1B332227006D2CCA /* MJLleidaNetMessageStatus.m in Sources */,
 				D2E9AB271B32DAC4006D2CCA /* AppDelegate.m in Sources */,
 				D2E9AB6C1B32DAFB006D2CCA /* MJLleidaNetResult.m in Sources */,
+				D20322B11B394F2500125C81 /* MJXMLObject+Debug.m in Sources */,
 				D2E9AB6D1B32DAFB006D2CCA /* MJLleidaNetUserInfo.m in Sources */,
 				D2E9AB881B332102006D2CCA /* MJLleidaNetMessageStatusRequest.m in Sources */,
 				D2E9AB691B32DAFB006D2CCA /* MJLleidaNetClient.m in Sources */,

@@ -16,7 +16,7 @@
 
 #import "MJLleidaNetUserInfo.h"
 
-#import "MJLleidaNetXML.h"
+#import "MJXMLObject+Debug.h"
 
 @implementation MJLleidaNetUserInfo
 {
@@ -28,9 +28,9 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
-    if ([elementName isEqualToString:kPhoneNumberKey])
+    if ([elementName isEqualToString:@"phone_number"])
     {
-        _phoneNumber = [[MJLleidaNetPhoneNumber alloc] initWithParent:self xmlKey:kPhoneNumberKey];
+        _phoneNumber = [[MJLleidaNetPhoneNumber alloc] initWithParent:self xmlKey:@"phone_number"];
         parser.delegate = _phoneNumber;
     }
     else
@@ -46,43 +46,43 @@
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {    
-    if ([elementName isEqualToString:kUserKey])
+    if ([elementName isEqualToString:@"user"])
     {
         _name = [_mutableString copy];
     }
-    else if ([elementName isEqualToString:kCreditKey])
+    else if ([elementName isEqualToString:@"credit"])
     {
         _credit = [[_mutableString copy] doubleValue];
     }
-    else if ([elementName isEqualToString:kStatusKey])
+    else if ([elementName isEqualToString:@"status"])
     {
         _status = [_mutableString copy];
     }
-    else if ([elementName isEqualToString:kCreatedKey])
+    else if ([elementName isEqualToString:@"created"])
     {
         _created = [NSDate dateWithTimeIntervalSince1970:[[_mutableString copy] doubleValue]];
     }
-    else if ([elementName isEqualToString:kLastOpKey])
+    else if ([elementName isEqualToString:@"lastop"])
     {
         _lastOperation = [NSDate dateWithTimeIntervalSince1970:[[_mutableString copy] doubleValue]];
     }
-    else if ([elementName isEqualToString:kContactNameKey])
+    else if ([elementName isEqualToString:@"contact_name"])
     {
         _contactName = [_mutableString copy];
     }
-    else if ([elementName isEqualToString:kPhoneKey])
+    else if ([elementName isEqualToString:@"phone"])
     {
         _phone = [_mutableString copy];
     }
-    else if ([elementName isEqualToString:kEmailKey])
+    else if ([elementName isEqualToString:@"email"])
     {
         _email = [_mutableString copy];
     }
-    else if ([elementName isEqualToString:kOrganizationKey])
+    else if ([elementName isEqualToString:@"organization"])
     {
         _organization = [_mutableString copy];
     }
-    else if ([elementName isEqualToString:kCifKey])
+    else if ([elementName isEqualToString:@"cif"])
     {
         _cif = [_mutableString copy];
     }

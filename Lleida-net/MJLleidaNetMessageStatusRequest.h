@@ -18,6 +18,8 @@
 
 @interface MJLleidaNetMessageStatusRequest : MJLleidaNetRequest
 
++ (MJLleidaNetMessageStatusRequest*)requestWithIdentifier:(NSString*)identifier;
+
 @property (nonatomic, strong) NSString *identifier;
 
 @end

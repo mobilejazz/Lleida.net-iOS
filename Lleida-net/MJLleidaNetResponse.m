@@ -16,8 +16,6 @@
 
 #import "MJLleidaNetResponse.h"
 
-#import "MJLleidaNetXML.h"
-
 @implementation MJLleidaNetResponse
 
 #pragma mark - Protocols
@@ -37,9 +35,9 @@
 {
      NSLog(@"didStartElement:<%@>", elementName);
     
-    if ([elementName isEqualToString:kResultKey])
+    if ([elementName isEqualToString:@"result"])
     {
-        _result = [[MJLleidaNetResult alloc] initWithParent:self xmlKey:kResultKey];
+        _result = [[MJLleidaNetResult alloc] initWithParent:self xmlKey:@"result"];
         parser.delegate = _result;
     }
 }

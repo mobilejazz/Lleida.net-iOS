@@ -98,10 +98,19 @@ typedef void (^MJLleidaNetResultBlock)(MJLleidaNetResult *result, NSError *error
 /**
  * Send a SMS message to multiple phones.
  * @param message The message to send.
- * @param phones An array of strings of phone numbers.
+ * @param recipients An array of strings of phone numbers.
  * @param completionBlock A completion block.
  **/
-- (void)api_sendSMS:(NSString*)message phones:(NSArray*)phones completionBlock:(MJLleidaNetResultBlock)completionBlock;
+- (void)api_sendSMS:(NSString*)message recipients:(NSArray*)recipients completionBlock:(MJLleidaNetResultBlock)completionBlock;
+
+/**
+ * Send a WAP message to multiple phones.
+ * @param message The message to send.
+ * @param recipients An array of strings of phone numbers.
+ * @param url The url to send.
+ * @param completionBlock A completion block.
+ **/
+- (void)api_sendWAP:(NSString*)message recipients:(NSArray*)recipients url:(NSURL*)url completionBlock:(MJLleidaNetResultBlock)completionBlock;
 
 /**
  * Requests the state of a sent message.

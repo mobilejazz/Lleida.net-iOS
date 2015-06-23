@@ -18,6 +18,13 @@
 
 @implementation MJLleidaNetMessageStatusRequest
 
++ (MJLleidaNetMessageStatusRequest*)requestWithIdentifier:(NSString*)identifier
+{
+    MJLleidaNetMessageStatusRequest *instance = [MJLleidaNetMessageStatusRequest new];
+    instance.identifier = identifier;
+    return instance;
+}
+
 - (NSString*)xmlWithUsername:(NSString *)username password:(NSString *)password
 {
     if (_identifier == nil)

@@ -17,7 +17,8 @@
 
 typedef NS_ENUM(NSUInteger, Section)
 {
-    SectionConfiguration,
+    SectionAccount,
+    SectionOptions,
     SectionActions,
 };
 
@@ -43,6 +44,8 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
     __weak IBOutlet UITextField *_usernameField;
     __weak IBOutlet UITextField *_passwordField;
     
+    __weak IBOutlet UITextField *_sourceNameField;
+    __weak IBOutlet UITextField *_deliverReciptField;
     
     __block UITextField *_numberField;
     __block UITextField *_messageField;
@@ -75,6 +78,8 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
 {
     NSString *phone = _numberField.text;
     NSString *message = _messageField.text;
+    NSString *deliveryReciptEmail = _deliverReciptField.text;
+    NSString *sourceName = _sourceNameField.text;
     
     if (phone.length == 0 || message.length == 0)
     {
@@ -82,8 +87,20 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
     }
     else
     {
+        MJLleidaNetSMSRequest *request = [MJLleidaNetSMSRequest requestWithText:message recipients:@[phone]];
+        
+        if (deliveryReciptEmail.length > 0)
+        {
+            MJLleidaNetSMSDeliveryReceipt *deliveryRecipt = [MJLleidaNetSMSDeliveryReceipt deliveryReceiptWithEmail:deliveryReciptEmail
+                                                                                                           language:MJLLeidaNetLanguageCodeEnglish];
+            request.deliveryRecipt = deliveryRecipt;
+        }
+        
+        if (sourceName.length > 0)
+            request.sourceName = sourceName;
+        
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [_client api_sendSMS:message phones:@[phone] completionBlock:^(MJLleidaNetResult *result, NSError *error) {
+        [_client performRequest:request completionBlock:^(MJLleidaNetResult *result, NSError *error) {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
             if (error)
@@ -99,6 +116,7 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
     NSString *phone = _numberField.text;
     NSString *message = _messageField.text;
     NSString *url = _urlField.text;
+    NSString *deliveryReciptEmail = _deliverReciptField.text;
     
     if (phone.length == 0 || message.length == 0 || url.length == 0)
     {
@@ -106,13 +124,16 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
     }
     else
     {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        MJLleidaNetWAPRequest *request = [MJLleidaNetWAPRequest requestWithText:message url:[NSURL URLWithString:url] recipients:@[phone]];
         
-        MJLleidaNetWAPRequest *request = [MJLleidaNetWAPRequest new];
-        request.recipients = @[phone];
-        request.text = message;
-        request.wapURL = [NSURL URLWithString:url];
-        [_client performRequest:request completionBlock:^(MJLleidaNetResult *result, NSError *error) {
+        if (deliveryReciptEmail.length > 0)
+        {
+            MJLleidaNetWAPDeliveryReceipt *deliveryRecipt = [MJLleidaNetWAPDeliveryReceipt deliveryReceiptWithEmail:deliveryReciptEmail];
+            request.deliveryRecipt = deliveryRecipt;
+        }
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [_client api_sendWAP:message recipients:@[phone] url:[NSURL URLWithString:url] completionBlock:^(MJLleidaNetResult *result, NSError *error) {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
             if (error)
@@ -121,7 +142,6 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
                 [self mjz_showResult:result];
         }];
     }
-    
 }
 
 #pragma mark UITextFieldDelegate
@@ -165,6 +185,14 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
             [self mjz_sendSMS];
             [_messageField resignFirstResponder];
         }];
+    }
+    else if (textField == _sourceNameField)
+    {
+        [textField resignFirstResponder];
+    }
+    else if (textField == _deliverReciptField)
+    {
+        [textField resignFirstResponder];
     }
     
     return NO;

@@ -16,7 +16,14 @@
 
 #import "MJLleidaNetWAPRequest.h"
 
-@implementation MJLleidaNetWAPDeliveryRecipt
+@implementation MJLleidaNetWAPDeliveryReceipt
+
++ (MJLleidaNetWAPDeliveryReceipt*)deliveryReceiptWithEmail:(NSString*)email
+{
+    MJLleidaNetWAPDeliveryReceipt *instance = [MJLleidaNetWAPDeliveryReceipt new];
+    instance.email = email;
+    return instance;
+}
 
 - (NSString*)xml
 {
@@ -49,6 +56,15 @@
 
 @implementation MJLleidaNetWAPRequest
 
++ (MJLleidaNetWAPRequest*)requestWithText:(NSString*)text url:(NSURL*)url recipients:(NSArray*)recipients
+{
+    MJLleidaNetWAPRequest *instance = [MJLleidaNetWAPRequest new];
+    instance.text = text;
+    instance.url = url;
+    instance.recipients = recipients;
+    return instance;
+}
+
 - (NSString*)xmlWithUsername:(NSString*)username password:(NSString*)password
 {
     NSMutableString *xmlBody = [NSMutableString string];
@@ -78,8 +94,8 @@
     [xmlBody appendFormat:@"<txt encoding=\"base64\" charset=\"utf-16\">%@</txt>", [[_text dataUsingEncoding:NSUTF16StringEncoding] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
     
     // WAP url
-    if (_wapURL)
-        [xmlBody appendFormat:@"<url>%@</url>", [_wapURL absoluteString]];
+    if (_url)
+        [xmlBody appendFormat:@"<url>%@</url>", [_url absoluteString]];
     
     // Delivery recipt
     if (_deliveryRecipt)

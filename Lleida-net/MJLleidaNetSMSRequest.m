@@ -39,7 +39,22 @@ NSString* NSStringFromMJLleidaNetScheduleDate(NSDate *date)
     return [dateFormatter stringFromDate:date];
 }
 
-@implementation MJLleidaNetSMSDeliveryRecipt
+@implementation MJLleidaNetSMSDeliveryReceipt
+
++ (MJLleidaNetSMSDeliveryReceipt*)deliveryReceiptWithEmail:(NSString*)email
+{
+    MJLleidaNetSMSDeliveryReceipt *instance = [MJLleidaNetSMSDeliveryReceipt new];
+    instance.email = email;
+    return instance;
+}
+
++ (MJLleidaNetSMSDeliveryReceipt*)deliveryReceiptWithEmail:(NSString*)email language:(MJLleidaNetLanguageCode*)language
+{
+    MJLleidaNetSMSDeliveryReceipt *instance = [MJLleidaNetSMSDeliveryReceipt new];
+    instance.email = email;
+    instance.languageCode = language;
+    return instance;
+}
 
 - (NSString*)xml
 {
@@ -52,7 +67,7 @@ NSString* NSStringFromMJLleidaNetScheduleDate(NSDate *date)
         if (_languageCode.length > 0)
             [options appendFormat:@" lang=\"%@\"", _languageCode];
         
-        if (_requestReciptCertificate)
+        if (_requestReceiptCertificate)
             [options appendFormat:@" cert_type=\"D\""];
         
         if (_certificateName)
@@ -62,13 +77,13 @@ NSString* NSStringFromMJLleidaNetScheduleDate(NSDate *date)
             [options appendFormat:@" cert_name_id=\"%@\"", _certificateId];
         
         
-        [xmlBody appendFormat:@"<delivery_recipt%@>", options];
+        [xmlBody appendFormat:@"<delivery_receipt%@>", options];
         [xmlBody appendFormat:@"%@", _email];
-        [xmlBody appendString:@"</delivery_recipt>"];
+        [xmlBody appendString:@"</delivery_receipt>"];
     }
     else
     {
-        [xmlBody appendString:@"<delivery_recipt/>"];
+        [xmlBody appendString:@"<delivery_receipt/>"];
     }
     
     return [xmlBody copy];
@@ -77,6 +92,14 @@ NSString* NSStringFromMJLleidaNetScheduleDate(NSDate *date)
 @end
 
 @implementation MJLleidaNetSMSRequest
+
++ (MJLleidaNetSMSRequest*)requestWithText:(NSString*)text recipients:(NSArray*)recipients
+{
+    MJLleidaNetSMSRequest *instance = [MJLleidaNetSMSRequest new];
+    instance.text = text;
+    instance.recipients = recipients;
+    return instance;
+}
 
 - (NSString*)xmlWithUsername:(NSString*)username password:(NSString*)password
 {
