@@ -234,6 +234,7 @@ static NSString * const kPasswordKey = @"com.mobilejazz.Lleida-net.password";
                 [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
                     _numberField = textField;
                     textField.placeholder = @"Phone number";
+                    textField.text = nil;
                     textField.keyboardType = UIKeyboardTypePhonePad;
                     textField.delegate = self;
                 }];
