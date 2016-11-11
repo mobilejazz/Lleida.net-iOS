@@ -1,6 +1,6 @@
 {
   "name": "Lleida.net-iOS",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "summary": "Unofficial iOS Client for Lleida.net.",
   "description": "Unofficial iOS client for Lleida.net created by the Mobile Jazz team.",
   "homepage": "https://github.com/mobilejazz/Lleida.net-iOS",
@@ -17,7 +17,7 @@
   },
   "source": {
     "git": "https://github.com/mobilejazz/Lleida.net-iOS.git",
-    "tag": "1.0.0"
+    "tag": "1.0.1"
   },
   "source_files": "Lleida-net/*.{h,m}",
   "frameworks": "Foundation",

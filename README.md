@@ -10,7 +10,7 @@ iOS client for Lleida.net services
 ## Instalation
 The easiest way of installing the Lleida.net SDK is to use Cocoa Pods:
 ```
-pod 'Lleida.net', :git => 'https://github.com/mobilejazz/Lleida.net-iOS.git'
+pod 'Lleida.net', '~> 1.0.0'
 ```
 
 ## Usage
