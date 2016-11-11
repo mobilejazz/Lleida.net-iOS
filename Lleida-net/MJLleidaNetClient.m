@@ -63,22 +63,19 @@
 
 - (void)mjz_sendXML:(NSString*)xml completionBlock:(MJLleidaNetResultBlock)completionBlock
 {
-    [_httpSessionManager POST:@"" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        
+    [_httpSessionManager POST:@"" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         NSData *data = [xml dataUsingEncoding:NSUTF8StringEncoding];
         [formData appendPartWithFileData:data name:@"xml" fileName:@"xml" mimeType:@"applicaiton/xml"];
-        
-    } success:^(NSURLSessionDataTask *task, NSXMLParser *xmlParser) {
-        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        // Nothing to do
+    } success:^(NSURLSessionDataTask * _Nonnull task, NSXMLParser * _Nullable xmlParser) {
         MJLleidaNetResponse *response = [[MJLleidaNetResponse alloc] init];
         xmlParser.delegate = response;
-        
         [xmlParser parse];
         
         if (completionBlock)
             completionBlock(response.result, [xmlParser parserError]);
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (completionBlock)
             completionBlock(nil, error);
     }];
