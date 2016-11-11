@@ -1,3 +1,9 @@
+[![Version](https://cocoapod-badges.herokuapp.com/v/Lleida.net-iOS/badge.png)](http://cocoadocs.org/docsets/Lleida.net-iOS)
+[![Platform](https://cocoapod-badges.herokuapp.com/p/Lleida.net-iOS/badge.png)](http://cocoadocs.org/docsets/Lleida.net-iOS)
+[![CocoaDocs](https://img.shields.io/badge/docs-%E2%9C%93-blue.svg)](http://cocoadocs.org/docsets/Hermod)
+<!--- [![Build Status](https://travis-ci.org/mobilejazz/Motis.png)](https://travis-ci.org/mobilejazz/Lleida.net-iOS)-->
+
+
 # Lleida.net-iOS
 iOS client for Lleida.net services
 
