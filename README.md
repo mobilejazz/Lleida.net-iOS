@@ -3,6 +3,7 @@
 [![CocoaDocs](https://img.shields.io/badge/docs-%E2%9C%93-blue.svg)](http://cocoadocs.org/docsets/Lleida.net-iOS)
 <!--- [![Build Status](https://travis-ci.org/mobilejazz/Motis.png)](https://travis-ci.org/mobilejazz/Lleida.net-iOS)-->
 
+![Lleida.net-iOS](https://raw.githubusercontent.com/mobilejazz/metadata/master/images/banners/mobile-jazz-lleidanet-ios.jpg)
 
 # Lleida.net-iOS
 iOS client for Lleida.net services
